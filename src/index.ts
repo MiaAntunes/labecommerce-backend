@@ -1,1 +1,2 @@
-console.log("Deu certo")
+import { User } from "./types";
+console.log("deu certo!")
