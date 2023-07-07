@@ -1,5 +1,5 @@
 export type User = {
-    id:number,
+    id:string,
     name:string
     email:string
     password:string
@@ -8,7 +8,7 @@ export type User = {
 //Duvidas
 
 export type Product = {
-    id:number
+    id:string
     name:string
     price:number
     description:string
