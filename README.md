@@ -39,6 +39,24 @@ O Projeto Labecommerce é uma API desenvolvida para gerenciar as transações de
     - Cadastrar
     - Deletar
 
+## Tutorial de uso:
+
+```bash
+
+1. Baixe ou clone o repositório em seu computador.
+
+2. Abra a pasta do repositório no terminal do Git e execute o seguinte comando para instalar as dependências do projeto:
+$ npm install && code .
+
+3. Abra o Visual Studio Code (Vscode) e, no terminal integrado do Vscode, digite o seguinte comando para iniciar o servidor em modo de desenvolvimento:
+$ npm run dev
+
+4. Em seguida, abra o aplicativo Postman e insira o link da API no topo da interface.
+
+5. Com o servidor sendo executado na porta 3003, você poderá utilizar a API livremente para interagir com o projeto.
+
+```
+
 ## Tecnologias Utilizadas
 
 - NodeJS
@@ -47,3 +65,4 @@ O Projeto Labecommerce é uma API desenvolvida para gerenciar as transações de
 - SQL e SQLite
 - Knex
 - Postman
+- Git
