@@ -10,13 +10,16 @@ O Projeto Labecommerce é uma API desenvolvida para gerenciar as transações de
 ## Lista de requisitos
 
 - [x]  Get all users
+- [x]  Get all products
+- [x]  Search Products by id
+- [x]  Search Purchase by id
 - [x]  Create user
 - [x]  Create product
-- [x]  Get all products funcionalidades 1 e 2
-- [x]  Edit product by id
 - [x]  Create purchase
+- [x]  Delete user by id
+- [x]  Delete product by id
 - [x]  Delete purchase by id
-- [x]  Get purchase by id
+- [x]  Edit product by id
 
 ## Essa API de E-commerce contém as seguintes funcionalidades:
 
