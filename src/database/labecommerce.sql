@@ -52,25 +52,6 @@ VALUES
    ("004", "Howard Wolowitz", "howard@gmail.com","euSOUumGostoso0101!", DATETIME('now'));
 
 
--- Create Product
-INSERT INTO product (id,name,price,description,image_url)
-VALUES
-  ("006","Placa de Vídeo RTX 4060 Ti Eagle OC Gigabyte NVIDIA GeForce, 8 GB GDDR6, DLSS, Ray Tracing - GV-N406TEAGLE OC-8GD G10",3189.99,"O sistema de resfriamento WINDFORCE possui três Coolers exclusivos de 80 mm, com rotação alternada, 3 tubos de calor de cobre composto diretamente na GPU, coolers ativos 3D e resfriamento de tela, que juntos fornecem dissipação de calor de alta eficiência.O cooler ativo 3D fornece resfriamento semipassivo e  permanecerão desligados quando a GPU estiver em um jogo de baixa carga ou baixo consumo de energia.O fluxo de ar é derramado pela borda triangular do cooler e guiado suavemente pela curva da faixa 3D na superfície.","https://images.kabum.com.br/produtos/fotos/462166/placa-de-video-rtx-4060-ti-gigabyte-gv-n406teagle-oc-8gd-g10-_1684842454_p.jpg");
-
-  
-  --Delete user by id
-  DELETE FROM users
-  WHERE id = "004";
-
-  -- Delete product by 
-  DELETE FROM product
-  WHERE id = "006";
-
-  --Edit Product by id
-  UPDATE product
-  SET price = 600
-  WHERE id = "001";
-
   --Criação da tabela de pedidos--------
   CREATE TABLE purchases(
     id TEXT PRIMARY KEY UNIQUE NOT NULL,
@@ -80,32 +61,16 @@ VALUES
     FOREIGN KEY (buyer) REFERENCES users(id)
   );
 
-INSERT INTO purchases (id,buyer,total_price,created_at)
-VALUES 
-    ("p001","001", 4379, DATETIME('now')),
-    ("p002","003", 630, DATETIME('now'));
-
 SELECT * FROM purchases;
-
-INSERT INTO purchases (id,buyer,total_price,created_at)
-VALUES 
-    ("p003","002",8899.99 , DATETIME('now'));
-
-
---Edit o preço total do pedido
-UPDATE purchases
-SET total_price = 1309.79
-WHERE id = "p002";
-
-
 
 SELECT 
   purchases.id,
-  users.id,
+  buyer,
   users.name,
   users.email,
   purchases.total_price,
   purchases.created_at
+  purchase_products
 FROM users
 INNER JOIN purchases
 ON purchases.buyer = users.id;
@@ -125,13 +90,6 @@ CREATE TABLE purchase_products(
 	  ON DELETE CASCADE
 );
 
-INSERT INTO purchase_products (purchase_id,product_id,quantity)
-VALUES 
-     ('p001','005', 1),
-     ('p001','001', 1),
-     ('p002','001', 1),
-     ('p002','004', 1),
-     ('p003','003', 1);
 
 SELECT * FROM purchase_products;
 
@@ -141,7 +99,16 @@ ON purchases.id = purchase_products.purchase_id
 INNER JOIN product 
 ON product.id = purchase_products.product_id;
 
-SELECT * FROM purchase_products AS pur_por
+SELECT 
+  purchases.id AS purchaseId,
+  purchases.buyer AS buyerId,
+  users.name AS buyerName,
+  users.email AS buyerEmail,
+  purchases.total_price AS totalPrice,
+  purchases.created_at AS createdAt,
+  purchase_products.product_id AS productsId,
+  purchase_products.quantity AS quantitity
+FROM purchase_products AS pur_por
 INNER JOIN purchases AS pur
 ON pur_por.purchase_id = pur.id
 INNER JOIN product AS por
