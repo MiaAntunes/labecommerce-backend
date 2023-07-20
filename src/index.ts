@@ -54,10 +54,8 @@ app.get('/product/:name', async (req: Request, res: Response) => {
     try {
 
         const nameProduct = req.params.name as string 
-        console.log(nameProduct)
 
         const productExist = await db("product").whereLike("name",`%${nameProduct}%`)
-        console.log(productExist)
 
         if(productExist.length === 0){
             res.statusCode = 400
@@ -113,16 +111,6 @@ app.get('/purchases/:id', async (req: Request, res: Response) => {
             ...resultPurchaseUser,
             products: resultPurchaseProduct
         };
-
-        // for (let descricao of resultPurchaseUser) {
-        //     const [descriptionThePurchase] = await db('purchases').where({ id: descricao.id });
-        //     resultTotal.push(
-        //         { purchaseDetails: descricao, productDetails: descriptionThePurchase },
-        //         ...resultPurchaseProduct
-        //     );
-        // }
-        console.log(resultPurchaseUser)
-        console.log(resultPurchaseProduct)
 
         res.status(200).send(resultTotal);
     } catch (error: any) {
@@ -353,8 +341,7 @@ app.post('/purchases', async (req: Request, res: Response) => {
         const id = req.body.id as string
         const buyer = req.body.buyer as string
         const products = req.body.products
-        // const totalPrice = req.body.total_price as number
-        console.log(products)
+
 
         const [purchaseExist] = await db("purchases").where({ id: id })
 
@@ -393,7 +380,6 @@ app.post('/purchases', async (req: Request, res: Response) => {
         let totalPrice = 0
 
         for (let prod of products) {
-            console.log(prod)
             const [product] = await db('product').where({ id: prod.id })
             if (!product) {
                 res.status(400)
@@ -426,7 +412,6 @@ app.post('/purchases', async (req: Request, res: Response) => {
                 product_id: product.id,
                 quantity: product.quantity
             }
-            console.log(product)
             await db('purchase_products').insert(newPurchaseProducts)
         }
 
@@ -505,7 +490,6 @@ app.delete('/purchase/:id', async (req: Request, res: Response) => {
 
         // Procurar se existe ou não 
         const [purchaseExist] = await db("purchases").where({ id: deletePurchaseById });
-        console.log(purchaseExist)
 
         //SE não existir, mostre um erro
         if (!purchaseExist) {
