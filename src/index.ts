@@ -101,6 +101,11 @@ app.get('/purchases/:id', async (req: Request, res: Response) => {
         const resultPurchaseProduct = await db
             .select(
                 "purchase_products.product_id AS productsId",
+                "product.id",
+                "product.name",
+                "product.price",
+                "product.description",
+                "product.image_url",
                 "purchase_products.quantity AS quantity"
             )
             .from("purchase_products")
