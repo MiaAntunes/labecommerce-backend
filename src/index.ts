@@ -103,6 +103,11 @@ app.get('/purchases/:id', async (req: Request, res: Response) => {
         const resultPurchaseProduct = await db
             .select(
                 "purchase_products.product_id AS productsId",
+                "product.id",
+                "product.name",
+                "product.price",
+                "product.description",
+                "product.image_url",
                 "purchase_products.quantity AS quantity"
             )
             .from("purchase_products")
@@ -113,16 +118,6 @@ app.get('/purchases/:id', async (req: Request, res: Response) => {
             ...resultPurchaseUser,
             products: resultPurchaseProduct
         };
-
-        // for (let descricao of resultPurchaseUser) {
-        //     const [descriptionThePurchase] = await db('purchases').where({ id: descricao.id });
-        //     resultTotal.push(
-        //         { purchaseDetails: descricao, productDetails: descriptionThePurchase },
-        //         ...resultPurchaseProduct
-        //     );
-        // }
-        console.log(resultPurchaseUser)
-        console.log(resultPurchaseProduct)
 
         res.status(200).send(resultTotal);
     } catch (error: any) {
